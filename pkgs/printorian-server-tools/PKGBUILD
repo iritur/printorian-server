@@ -1,0 +1,23 @@
+# The repo's own first-class tooling, packaged so the farm host — and the
+# dev VM, which runs the identical baseline — can pacman-install it instead
+# of cloning. Sources are the canonical files in tools/; a version bump
+# means copying them here with fresh sums (the pipeline drafts that).
+#
+# License is 'custom' until the owner picks one for the repository.
+pkgname=printorian-server-tools
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Printorian host-layer tooling: psrv-bootstrap (canonical host baseline) and psrv-probe (hardware/env probe)'
+arch=(any)
+url='https://github.com/iritur/printorian-server'
+license=('custom')
+depends=(python)
+source=('psrv_bootstrap.py'
+        'psrv_probe.py')
+sha512sums=('b5acf36a1fbcfe92e31a9333238ed75da4ff31dcdca4d65fa5d8231fc723c798e3d1bc6db2fe503810178c022d76a1f57f158b8766027c152669dd8ab65a4b63'
+            '3f8a7da9adced534cbb0896637c5e1018977b7ba99cabc50c537aca63d9d95edddbd7fd36a3e38b53f27fa2e5961a8fedf8a2db615181767cf07012c2d584684')
+
+package() {
+    install -Dm755 "$srcdir/psrv_bootstrap.py" "$pkgdir/usr/bin/psrv-bootstrap"
+    install -Dm755 "$srcdir/psrv_probe.py" "$pkgdir/usr/bin/psrv-probe"
+}

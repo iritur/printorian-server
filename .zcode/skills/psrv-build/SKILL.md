@@ -81,6 +81,10 @@ An install test that touches nothing on the host:
 
 ```bash
 VROOT=$(mktemp -d)
+sudo chmod 755 "$VROOT"   # pacman 7 drops downloads to the unprivileged
+                          # `alpm` user — a 0700 mktemp dir fails with
+                          # "Permission denied" on *.db.part
+sudo pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -Sy --noconfirm  # seed repo dbs (deps resolve)
 sudo pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -U \
   pkgs/<name>/*.pkg.tar.zst --noconfirm
 pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -Ql <name>

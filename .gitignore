@@ -4,3 +4,12 @@ psrv-probe-report.json
 __pycache__/
 *.pyc
 .venv/
+
+# makepkg workdirs and the built artifacts in pkgs/ — the package the repo
+# ships lives in repo/x86_64/ (that one IS committed; the repo is served
+# from git)
+pkgs/*/src/
+pkgs/*/pkg/
+pkgs/*/*.pkg.tar.*
+pkgs/*/*.src.tar.*
+pkgs/*/*.log

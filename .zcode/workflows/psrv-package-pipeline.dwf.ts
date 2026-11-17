@@ -203,7 +203,7 @@ if (validate.exitCode !== 0) {
 
 // ---------------------------------------------------------------------------
 phase("Build in a clean chroot");
-const build = await world.run("bash", ["-c", `cd pkgs/${pkgName} && extra-x86_64-build -- --noconfirm`], {
+const build = await world.run("bash", ["-c", `cd pkgs/${pkgName} && extra-x86_64-build`], {
   timeoutMs: 3_600_000,
   output: { tail: 16_384 },
 });
@@ -255,6 +255,7 @@ const verifyInstall = await world.run(
   [
     "-c",
     `VROOT=$(mktemp -d /tmp/psrv-verify.XXXXXX) && sudo mkdir -p "$VROOT/var/lib/pacman" && ` +
+      `sudo pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -Sy --noconfirm --disable-download-timeout && ` +
       `sudo pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -U ${builtPath} --noconfirm --disable-download-timeout && ` +
       `pacman --root "$VROOT" --dbpath "$VROOT/var/lib/pacman" -Ql ${pkgName} | head -30; RC=$?; ` +
       `sudo rm -rf "$VROOT"; exit $RC`,
