@@ -1,0 +1,6 @@
+# Generated per-host artifacts (regenerated, never committed — the hook
+# blocks hand edits for the same reason)
+psrv-probe-report.json
+__pycache__/
+*.pyc
+.venv/
