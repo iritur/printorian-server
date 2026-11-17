@@ -250,6 +250,14 @@ def apply_db_objects() -> None:
                             f"CREATE ROLE {ROLE} LOGIN PASSWORD '{ROLE}';"])
         if proc.returncode != 0:
             raise RuntimeError(f"role creation failed: {proc.stderr.strip()[-300:]}")
+    # The app's test harness creates and drops scratch databases (the
+    # docker-compose dev world runs POSTGRES_USER=printorian as the
+    # container's superuser). CREATEDB is the minimum that reproduces that
+    # on a native cluster without handing out superuser.
+    proc = as_postgres(["psql", "-p", str(PGPORT), "-c",
+                        f"ALTER ROLE {ROLE} CREATEDB;"])
+    if proc.returncode != 0:
+        raise RuntimeError(f"ALTER ROLE CREATEDB failed: {proc.stderr.strip()[-300:]}")
     for db in DATABASES:
         exists = as_postgres(["psql", "-p", str(PGPORT), "-tAc",
                               f"SELECT 1 FROM pg_database WHERE datname='{db}'"])
