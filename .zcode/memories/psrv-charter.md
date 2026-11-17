@@ -30,9 +30,9 @@ Arch for Printorian servicing.
 3. **A universal probe script** that investigates and gathers everything
    about the target installation — hardware, environment, virtualization
    (it may be a VPS) — to correctly optimize the ISO to be built.
-4. Repo at `printorian-server`, **origin on GitHub** (local repo initialized
-   2026-11-17; the GitHub repo itself did not exist yet when checked —
-   create before first push), with a script **mirroring to gitverse**
+4. Repo at `printorian-server`, **origin on GitHub** — created by the owner
+   2026-11-17 as PRIVATE `iritur/printorian-server`, first-pushed the same
+   day — with a script **mirroring to gitverse**
    (`gitverse.ru/printorian/server`, already created empty).
 5. **All scripts in Python.** TUI: nice, modern, technological — and
    correctly functional **through SSH** (Textual-class).

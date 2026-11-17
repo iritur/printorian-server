@@ -34,9 +34,11 @@ Evidence (all 2026-11-17, commands as run):
   present; podman user socket enabled, `DOCKER_HOST` in `~/.bashrc`.
 - Host: Python 3.14.10 (no `python3.13`); node 26.13.1; npm 12.2.2; gh
   authed as `dimmus` (SSH protocol); sudo NOPASSWD (wheel).
-- GitHub: no `printorian-server` repo under `dimmus` or `iritur` yet;
-  `iritur/gnome-git` and `iritur/pkgs` exist (the charter's reference
-  repos).
+- GitHub: `iritur/printorian-server` created by the owner (2026-11-17,
+  PRIVATE) and first-pushed the same day; `iritur/gnome-git` and
+  `iritur/pkgs` exist (the charter's reference repos). Serving the pacman
+  repo from git raw will need the repo PUBLIC (or token-auth Server= URLs)
+  — owner's call when the packages are ready for consumers.
 
 Disproven theory: "podman is broken" — podman was fine; the network path
 to Docker's CDNs is what fails. Another: "use a docker.io mirror" — every
